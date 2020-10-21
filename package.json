@@ -18,6 +18,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "react-spinkit": "^3.0.0",
+    "react-twitch-embed": "^2.1.0",
+    "react-twitch-embed-video": "^2.0.4",
     "reactstrap": "^8.5.1"
   },
   "scripts": {

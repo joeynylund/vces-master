@@ -5,6 +5,7 @@ import './index.css';
 import App from './App';
 import Login from './Login';
 import Register from './Register';
+import Profile from './Profile';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as serviceWorker from './serviceWorker';
 
@@ -15,6 +16,7 @@ function Application() {
         <Route exact path='/' component={App}/>
         <Route exact path='/login' component={Login}/>
         <Route exact path='/register' component={Register}/>
+        <Route exact path='/member/:member' component={Profile}/>
       </Switch>
     </Router>
   );

@@ -46,6 +46,13 @@ function App() {
           setEmailText('Email is required');
           setEmailValidation(true)
         } else {
+          fetch('https://nylund.dev/streamer/public/streamer/items/users?filter[email][eq]=' + email + '&access_token=VU73mX5crdWJYSOcwYxC5oE9')
+          .then(response => response.json())
+          .then(data => {
+          if(data.data.length >= 1) {
+            setEmailText('This email is already registered');
+            setEmailValidation(true)
+          } else {
           if(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) {
             if(password.length <= 7) {
               setPasswordValidation(true)
@@ -68,8 +75,8 @@ function App() {
           }
         }
       }
-    }
-  }
+    )}
+    }}}
 
   const NavBar2 = () => {
 

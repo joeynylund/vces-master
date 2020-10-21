@@ -24,7 +24,6 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  margin-top: -116px;;
 }
 
 .App-link {
@@ -32,11 +31,12 @@
 }
 
 #App .bg-light {
-  background-color: #121212!important;
+  background-color: transparent!important;
 }
 
 #App .navbar {
   justify-content: space-between!important;
+  z-index: 9;
 }
 
 html,
@@ -60,7 +60,7 @@ body {
   text-decoration: none;
   margin-bottom: 20px;
   padding-bottom: 20px;
-  color: #000;
+  color: #fff;
   transition: color 0.2s;
   border-bottom: 1px solid #b71314;
 }
@@ -108,14 +108,22 @@ body {
 .bm-overlay {
   background: rgba(0, 0, 0, 0.7)!important;
   transition: opacity 3s ease 0s, transform 2s ease 3s!important;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .bm-menu-wrap {
   transition: all 2.5s ease 0s!important;
+  width: 100%;
+  position: absolute;
+  top: 0;
 }
 
 .header {
   padding: 100px 0px;
+  z-index: 9;
 }
 
 .section {
@@ -125,4 +133,34 @@ body {
 .row {
   margin-left: 0px!important;
   margin-right: 0px!important;
+}
+
+.top:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.view-more {
+  color: #fff;
+  padding: 10px 25px;
+  background-color: #b71314;
+  margin-top: 10px;
+  margin-left: 15px;
+}
+
+.view-more:hover {
+  color: #fff;
+  padding: 10px 25px;
+  background-color: #b71314;
+  margin-top: 10px;
+  margin-left: 15px;
+}
+
+.sticky-top {
+  top: 10px!important
 }

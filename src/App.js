@@ -9,6 +9,7 @@ import {
 } from 'reactstrap';
 import logo from './V_spade_2.png';
 import adrian from './adrian.jpg';
+import adrianbg from './image3.jpg';
 import { slide as Menu } from 'react-burger-menu'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
@@ -74,6 +75,7 @@ function App() {
   const SideMenu = () => {
     return (
       <Menu slide right disableAutoFocus  isOpen={ menu } onClose={ closeMenu } customBurgerIcon={ false } width="500px">
+        <h2 style={{fontWeight:'600', textAlign:'left', color:'#b71314'}}>CURRENTLY LIVE</h2>
       {streamers && streamers.map(streamer => (
         <div style={{display:'flex',alignItems:'center'}}>
           <img src={streamer.logo} style={{width:'75px',borderRadius:'50%'}} />
@@ -92,7 +94,7 @@ function App() {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-      <div>
+      <div style={{width:'100%',position:'absolute',top:'0'}}>
 
         <Navbar color="light" light expand="md">
         <NavbarBrand href="/"><img src={logo} width="75px" /></NavbarBrand>
@@ -112,18 +114,18 @@ function App() {
   return (
     
     <div className="App" id="App">
+      <div className="top App-header" style={{backgroundImage:`url(${adrianbg})`,backgroundPosition:'bottom center',backgroundSize:'cover'}}>
       <SideMenu />
       <NavBar2 />
 
       <div class="header">
         <Container>
           <Row><center>
-            <img src={adrian} style={{borderRadius:'50%',marginBottom:'20px', maxWidth:'80%'}} />
             <h1 style={{color:'#fff'}}>Adrian Colbert Presents The House of Vces: A group of gamers gathered together from a shared common interest - video games and football. Welcome to the <span style={{color:'#b71314'}}>#houseofvces!</span></h1>
             </center></Row>
         </Container>
       </div>
-    
+    </div>
       <div class="section" style={{backgroundColor:'#212121'}}>
         <Container>
           <Row>
