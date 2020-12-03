@@ -7,8 +7,8 @@ import {
   Container,
   Col
 } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import logo from './V_spade_2.png';
-import adrian from './adrian.jpg';
 import adrianbg from './image3.jpg';
 import { slide as Menu } from 'react-burger-menu'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -43,10 +43,6 @@ function App() {
       .then((data) => {
 
         setMembers(data.users)
-
-        console.log(members)
-
-        console.log(data.users)
         
         data.users.forEach(user => {
           fetch('https://api.twitch.tv/kraken/streams/' + user._id, {
@@ -61,7 +57,8 @@ function App() {
                 setStreamers(oldArray => [...oldArray, details])
               }    
           })
-        })
+        });
+        
       });
 
   }
@@ -77,7 +74,7 @@ function App() {
       <Menu slide right disableAutoFocus  isOpen={ menu } onClose={ closeMenu } customBurgerIcon={ false } width="500px">
         <h2 style={{fontWeight:'600', textAlign:'left', color:'#b71314'}}>CURRENTLY LIVE</h2>
       {streamers && streamers.map(streamer => (
-        <div style={{display:'flex',alignItems:'center'}}>
+        <div style={{display:'flex',alignItems:'center'}} key={streamer.name}>
           <img src={streamer.logo} style={{width:'75px',borderRadius:'50%'}} />
           <div style={{marginLeft:'10px',textAlign:'left'}}>
             <h5 style={{marginBottom:'0px'}}>{streamer.name}</h5>
@@ -91,23 +88,22 @@ function App() {
 
   const NavBar2 = () => {
 
-    const [isOpen, setIsOpen] = useState(false);
-
     return (
       <div style={{width:'100%',position:'absolute',top:'0'}}>
 
         <Navbar color="light" light expand="md">
         <NavbarBrand href="/"><img src={logo} width="75px" /></NavbarBrand>
 
-          <NavbarText onClick={(e) => setMenu(!menu)} style={{color:'#b71314',fontWeight:'600',fontSize:'1.1rem',cursor:'pointer'}}> 
+        {streamers.length === 0 ? null : <NavbarText onClick={(e) => setMenu(!menu)} style={{color:'#b71314',fontWeight:'600',fontSize:'1.1rem',cursor:'pointer'}}> 
               LIVE STREAMS{'    '}<FontAwesomeIcon icon={faBars} style={{color:'#fff',marginLeft:'10px'}} />
-            </NavbarText>
+            </NavbarText>}
         </Navbar>
       </div>
     );
   }
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     loadTeam()
   },[]);
 
@@ -115,10 +111,11 @@ function App() {
     
     <div className="App" id="App">
       <div className="top App-header" style={{backgroundImage:`url(${adrianbg})`,backgroundPosition:'bottom center',backgroundSize:'cover'}}>
+
       <SideMenu />
       <NavBar2 />
 
-      <div class="header">
+      <div className="header">
         <Container>
           <Row><center>
             <h1 style={{color:'#fff'}}>Adrian Colbert Presents The House of Vces: A group of gamers gathered together from a shared common interest - video games and football. Welcome to the <span style={{color:'#b71314'}}>#houseofvces!</span></h1>
@@ -126,6 +123,16 @@ function App() {
         </Container>
       </div>
     </div>
+    <div class="section">
+        <Container>
+          <Row>
+            <h3 style={{color:'#fff',fontWeight:'600',marginBottom:'10px'}}>CURRENT GIVEAWAYS  <span style={{color:'#b71314', fontStyle:'italic'}}>///</span></h3>
+          </Row>
+          <Row>
+            \
+          </Row>
+        </Container>
+      </div>
       <div class="section" style={{backgroundColor:'#212121'}}>
         <Container>
           <Row>
@@ -133,9 +140,12 @@ function App() {
           </Row>
           <Row>
             {members.map(member => (
-              <Col xs="6" md="2" style={{marginBottom:'20px'}}>
+              <Col xs="6" md="2" style={{marginBottom:'20px'}} key={member.display_name}>
+                <Link to={{
+                pathname: "/member/" + member.display_name,
+              }}>
                 <img src={member.logo} style={{width:'100%', borderRadius:'50%'}} />
-                <h5 style={{color:'#b71314'}}>{member.display_name}</h5>
+                <h5 style={{color:'#b71314'}}>{member.display_name}</h5></Link>
               </Col>
             ))}
           </Row>
